@@ -1,3 +1,11 @@
+import sys
+# Read command-line argument if provided
+if len(sys.argv) > 1:
+    mode = sys.argv[1]
+else:
+    mode = 'all'
+
+
 # Collect student data
 names = []
 scores = []
@@ -20,47 +28,53 @@ while name != 'done':
     name = input('Enter student name (or done to stop): ')
 print('Data entry complete. ' + str(len(names)) + ' students entered. ')
 
-total = 0
-highest = scores[0]
-lowest = scores[0]
+# Around the Part 2 summary block:
+if mode == 'all' or mode == 'summary':
+    # ... your summary print statements here ...
+    total = 0
+    highest = scores[0]
+    lowest = scores[0]
 
-# for loop with range() to walk through both lists by index
-for i in range(len(names)):
-    total = total + scores[i]
-    if scores[i] > highest:
-        highest = scores[i]
-    if scores[i] < lowest:
-        lowest = scores[i]
+    # for loop with range() to walk through both lists by index
+    for i in range(len(names)):
+        total = total + scores[i]
+        if scores[i] > highest:
+            highest = scores[i]
+        if scores[i] < lowest:
+            lowest = scores[i]
 
-average = total / len(names)
+    average = total / len(names)
 
-print('')
-print('=== Class Summary ===')
-print('Total students : ' + str(len(names)))
-print('Class average  : ' + str(round(average, 1)))
-print('Highest score  : ' + str(highest))
-print('Lowest score   : ' + str(lowest))
+    print('')
+    print('=== Class Summary ===')
+    print('Total students : ' + str(len(names)))
+    print('Class average  : ' + str(round(average, 1)))
+    print('Highest score  : ' + str(highest))
+    print('Lowest score   : ' + str(lowest))
 
-print('')
-print('=== Full Grade Report ===')
-print(f"{'Name':<20} {'Score':<8} {'Grade':<6}")
-print('-' * 36)
+# Around the Part 3 report block:
+if mode == 'all' or mode == 'report':
+    # ... your report print statements here ...
+
+    print('')
+    print('=== Full Grade Report ===')
+    print(f"{'Name':<20} {'Score':<8} {'Grade':<6}")
+    print('-' * 36)
 
 # for loop directly over the names list
-for i in range(len(names)):
-    score = scores[i]
+    for i in range(len(names)):
+        score = scores[i]
 
-    # if/elif/else to assign letter grade
-    if score >= 90:
-        letter = 'A'
-    elif score >= 80:
-        letter = 'B'
-    elif score >= 70:
-        letter = 'C'
-    elif score >= 60:
-        letter = 'D'
-    else:
-        letter = 'F'
+        # if/elif/else to assign letter grade
+        if score >= 90:
+            letter = 'A'
+        elif score >= 80:
+            letter = 'B'
+        elif score >= 70:
+            letter = 'C'
+        elif score >= 60:
+            letter = 'D'
+        else:
+            letter = 'F'
 
-    print(f"{names[i]:<20} {score:<8} {letter:<6}")
-    
+        print(f"{names[i]:<20} {score:<8} {letter:<6}")
